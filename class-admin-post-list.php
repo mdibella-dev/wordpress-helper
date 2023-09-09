@@ -134,8 +134,8 @@ class Admin_Post_List {
      */
 
     function __construct( $post_type ) {
+        
         if( ! empty( $post_type ) ) :
-
             $this->set_post_type( $post_type );
 
             add_filter( "manage_{$this->get_post_type()}_posts_columns", [$this, 'manage_columns'], 10, 1 );
