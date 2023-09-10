@@ -90,7 +90,7 @@ class Admin_Post_List {
      *
      * @param array columns The columns
      *
-     * @return $array An associative array
+     * @return array An associative array
      */
 
     public function manage_sortable_columns( $columns ) {
