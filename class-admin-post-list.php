@@ -62,7 +62,7 @@ class Admin_Post_List {
      *
      * @param array $default The defaults for columns
      *
-     * @return $array An associative array describing the columns to use
+     * @return array An associative array describing the columns to use
      */
 
     public function manage_columns( $columns ) {
