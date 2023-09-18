@@ -121,10 +121,10 @@ class Admin_Post_List {
 
     public function pre_get_posts( $query ) {
 
-        if( is_admin() and $query->is_main_query() and ( $this->get_post_type() === $query->get( 'post_type' ) ) ) :
+        if ( is_admin() and $query->is_main_query() and ( $this->get_post_type() === $query->get( 'post_type' ) ) ) {
             $orderby = $query->get( 'orderby' );
             $this->manage_sorting( $orderby, $query );
-        endif;
+        }
     }
 
 
@@ -135,14 +135,14 @@ class Admin_Post_List {
 
     function __construct( $post_type ) {
 
-        if( ! empty( $post_type ) ) :
+        if ( ! empty( $post_type ) ) {
             $this->set_post_type( $post_type );
 
             add_filter( "manage_{$this->get_post_type()}_posts_columns", [$this, 'manage_columns'], 10, 1 );
             add_action( "manage_{$this->get_post_type()}_posts_custom_column", [$this, 'manage_custom_column'], 10, 2 );    // 9999?
             add_filter( "manage_edit-{$this->get_post_type()}_sortable_columns", [$this, 'manage_sortable_columns'], 10, 1 );
             add_action( "pre_get_posts", [$this, 'pre_get_posts'] );
-        endif;
+        }
     }
 
 }

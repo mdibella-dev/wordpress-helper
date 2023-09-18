@@ -69,9 +69,9 @@ abstract class Shortcode {
      */
 
     function __construct() {
-        if( ! empty( $this->tag ) ) :
+        if ( ! empty( $this->tag ) ) {
             add_shortcode( $this->tag, [$this, 'callback'] );
-        endif;
+        }
     }
 
 
@@ -95,9 +95,9 @@ abstract class Shortcode {
      */
 
     protected function set_atts( $atts ) {
-        if( ( true == is_array( $atts ) ) and ( 0 != count( $atts ) ) ) :
+        if ( ( true == is_array( $atts ) ) and ( 0 != count( $atts ) ) ) {
             $this->atts = array_merge( $this->default_atts, $atts );
-        endif;
+        }
     }
 
 
@@ -138,9 +138,9 @@ abstract class Shortcode {
         $this->set_content( $content );
 
         // Prepare the shortcode; exit if preparation process fails
-        if( false == $this->prepare() ) :
+        if ( false == $this->prepare() ) {
             return null;
-        endif;
+        }
 
         // Render the shortcode
         ob_start();
@@ -148,9 +148,9 @@ abstract class Shortcode {
         $output = ob_get_contents();
         ob_end_clean();
 
-        if( false === $output ) :   // buffering isn't active?
+        if ( false === $output ) {   // buffering isn't active?
             $output = '';
-        endif;
+        }
 
         return $output;
     }
