@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) or exit;
 /**
  * An abstract class for the implementation of shortcodes.
  *
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 abstract class Shortcode {
@@ -84,6 +84,18 @@ abstract class Shortcode {
 
     protected function set_content( $content ) {
         $this->content = $content;
+    }
+
+
+
+    /**
+     * Gets the content.
+     *
+     * @return string The content
+     */
+
+    protected function get_content() {
+        return $this->content;
     }
 
 
