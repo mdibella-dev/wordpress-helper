@@ -4,6 +4,8 @@
  *
  * @author  Marco Di Bella
  * @package wordpress-helper
+ *
+ * @version 1.1.0
  */
 
 namespace wordpress_helper;
@@ -16,154 +18,173 @@ defined( 'ABSPATH' ) or exit;
 
 
 
-/**
- * An abstract class for the implementation of shortcodes.
- *
- * @version 1.0.1
- */
-
-abstract class Shortcode {
+if ( ! class_exists( __NAMESPACE__ . '\Shortcode' ) ) {
 
     /**
-     * The shortcode tag.
+     * An abstract class for the implementation of shortcodes.
      *
-     * @var string
+     * @version 1.0.1
      */
 
-    protected $tag = '';
+    abstract class Shortcode {
+
+        /**
+         * The shortcode tag.
+         *
+         * @var string
+         */
+
+        protected $tag = '';
 
 
 
-    /**
-     * The default shortcode attributes (parameters).
-     *
-     * @var array
-     */
+        /**
+         * The shortcode attributes (parameters).
+         *
+         * @var array
+         */
 
-    protected $default_atts = [];
-
-
-
-    /**
-     * The shortcode attributes (parameters).
-     *
-     * @var array
-     */
-
-    protected $atts = [];
+        protected $atts = [];
 
 
 
-    /**
-     * The shortcode content (the code between the opening and closing shortcode clamp).
-     *
-     * @var string
-     */
+        /**
+         * The shortcode content (the code between the opening and closing shortcode clamp).
+         *
+         * @var string
+         */
 
-    protected $content = '';
-
-
-
-    /**
-     * Constructor: Adds the shortcode to the WordPress ecosystem.
-     */
-
-    function __construct() {
-        if ( ! empty( $this->tag ) ) {
-            add_shortcode( $this->tag, [$this, 'callback'] );
-        }
-    }
+        protected $content = '';
 
 
 
-    /**
-     * Sets the content.
-     *
-     * @param string $content The content
-     */
+        /**
+         * Constructor: Adds the shortcode to the WordPress ecosystem.
+         */
 
-    protected function set_content( $content ) {
-        $this->content = $content;
-    }
-
-
-
-    /**
-     * Gets the content.
-     *
-     * @return string The content
-     */
-
-    protected function get_content() {
-        return $this->content;
-    }
-
-
-
-    /**
-     * Merges the custom defined shortcode attributes with the default shortcode attributes.
-     *
-     * @param array $atts The array with shortcode attributes
-     */
-
-    protected function set_atts( $atts ) {
-        if ( ( true == is_array( $atts ) ) and ( 0 != count( $atts ) ) ) {
-            $this->atts = array_merge( $this->default_atts, $atts );
-        }
-    }
-
-
-
-    /**
-     * Prepares the shortcode (the shortcode logic).
-     *
-     * Note: Should be overloaded!
-     *
-     * @return bool true|false The outcome of the preparation process
-     */
-
-    function prepare() {
-        // This is a placeholder for shortcodes that have no processing logic and are for output only.
-        // Should be overloaded, if necessary.
-        return true;
-    }
-
-
-
-    /**
-     * Renders the shortcode (the shortcode output).
-     *
-     * Note: Must be overloaded!
-     */
-
-    abstract function render();
-
-
-
-    /**
-     * Processes all shortcode calls.
-     */
-
-    public function callback( $atts, $content = '' ) {
-        // Set up shortcode parameters
-        $this->set_atts( $atts );
-        $this->set_content( $content );
-
-        // Prepare the shortcode; exit if preparation process fails
-        if ( false == $this->prepare() ) {
-            return null;
+        function __construct() {
+            if ( ! empty( $this->get_tag() ) ) {
+                add_shortcode( $this->get_tag(), [$this, 'callback'] );
+            }
         }
 
-        // Render the shortcode
-        ob_start();
-        $this->render();
-        $output = ob_get_contents();
-        ob_end_clean();
 
-        if ( false === $output ) {   // buffering isn't active?
+
+        /**
+         * Gets the tag.
+         *
+         * @return string The shortcode tag
+         */
+
+        protected function get_tag() {
+            return $this->tag;
+        }
+
+
+
+        /**
+         * Gets the content.
+         *
+         * @return string The content
+         */
+
+        protected function get_content() {
+            return $this->content;
+        }
+
+
+
+        /**
+         * Gets the The default attributes of this shortcode.
+         *
+         * Note: Should be overloaded!
+         *
+         * @return array The default attributes
+         */
+
+        protected function get_default_atts() {
+            // This is a placeholder for shortcodes that have no default attributes.
+            // Should be overloaded, if necessary.
+            return [];
+        }
+
+
+
+        /**
+         * Sets the content.
+         *
+         * @param string $content The content
+         */
+
+        protected function set_content( $content ) {
+            $this->content = $content;
+        }
+
+
+
+        /**
+         * Merges the custom defined shortcode attributes with the default shortcode attributes.
+         *
+         * @param array $atts The array with shortcode attributes
+         */
+
+        protected function set_atts( $atts ) {
+            if ( ( true == is_array( $atts ) ) and ( 0 != count( $atts ) ) ) {
+                $this->atts = array_merge( $this->get_default_atts(), $atts );
+            }
+        }
+
+
+
+        /**
+         * Prepares the shortcode (the shortcode logic).
+         *
+         * Note: Should be overloaded!
+         *
+         * @return bool true|false The outcome of the preparation process
+         */
+
+        public function prepare() {
+            // This is a placeholder for shortcodes that have no processing logic and are for output only.
+            // Should be overloaded, if necessary.
+            return true;
+        }
+
+
+
+        /**
+         * Renders the shortcode (the shortcode output).
+         *
+         * Note: Must be overloaded!
+         */
+
+        abstract public function render();
+
+
+
+        /**
+         * Processes all shortcode calls.
+         */
+
+        public function callback( $atts, $content = '' ) {
             $output = '';
-        }
 
-        return $output;
+            // Set up shortcode parameters
+            $this->set_atts( $atts );
+            $this->set_content( $content );
+
+            // Prepare the shortcode
+            if ( false !== $this->prepare() ) {
+
+                // Render the shortcode
+                ob_start();
+                $this->render();
+                $output = ob_get_contents();
+                ob_end_clean();
+            }
+
+            return $output;
+        }
     }
+
 }
