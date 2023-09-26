@@ -93,7 +93,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Post_List' ) ) {
         /**
          * Modifys the query string (by assigning appropriate parameters).
          *
-         * @param WP_Query $query   A data object of the last query made
+         * @param WP_Query $query A data object of the last query made
          */
 
         public function manage_sorting( &$query ) {
