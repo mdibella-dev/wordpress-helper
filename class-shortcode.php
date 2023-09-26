@@ -5,7 +5,7 @@
  * @author  Marco Di Bella
  * @package wordpress-helper
  *
- * @version 1.1.0
+ * @version 1.1.1
  */
 
 namespace wordpress_helper;
@@ -131,6 +131,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Shortcode' ) ) {
         protected function set_atts( $atts ) {
             if ( ( true == is_array( $atts ) ) and ( 0 != count( $atts ) ) ) {
                 $this->atts = array_merge( $this->get_default_atts(), $atts );
+            } else {
+                $this->atts = $this->get_default_atts();
             }
         }
 
