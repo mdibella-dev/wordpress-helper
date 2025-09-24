@@ -5,7 +5,7 @@
  * @author  Marco Di Bella
  * @package wordpress-helper
  *
- * @version 1.1.1
+ * @version 1.1.2
  */
 
 namespace wordpress_helper;
@@ -57,9 +57,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Taxonomy_List' ) ) {
          * @return array An associative array describing the columns to use
          */
 
-        public function manage_columns( $columns ) {
+        public function manage_columns( $default ) {
             // do nothing
-            return $columns;
+            return $default;
         }
 
 
@@ -108,13 +108,31 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Taxonomy_List' ) ) {
 
 
         /**
+         * Filters the action links displayed for each term in the taxonomy list table.
+         *
+         * @see https://wordpress.stackexchange.com/questions/78211/remove-quick-edit-for-custom-post-type
+         * @see https://developer.wordpress.org/reference/hooks/taxonomy_row_actions/
+         *
+         * @param array   $actions  An array of action links to be displayed
+         * @param WP_Term $term     A term object.
+         *
+         * @return array The modified list of action links
+         */
+
+        public function manage_row_actions( $actions, $tag ) {
+            return $actions;
+        }
+
+
+
+        /**
          * Trigger the sorting if the last query was made in the backend and it was related to our post type.
          *
          * @param WP_Query $query A data object of the last query made
          */
 
         public function pre_get_posts( $query ) {
-        if ( is_admin() and $query->is_main_query() /*and ( $this->get_taxonomy() === $query->get( 'post_type' ) )*/ ) {
+        if ( is_admin() and $query->is_main_query() ) {
                 $this->manage_sorting( $query );
             }
         }
@@ -130,6 +148,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Taxonomy_List' ) ) {
                 add_filter( "manage_edit-{$this->get_taxonomy()}_columns", [$this, 'manage_columns'], 10, 1 );
                 add_action( "manage_{$this->get_taxonomy()}_custom_column", [$this, 'manage_custom_column'], 10, 3 );    // 9999?
                 add_filter( "manage_edit-{$this->get_taxonomy()}_sortable_columns", [$this, 'manage_sortable_columns'], 10, 1 );
+                add_filter( "{$this->get_taxonomy()}_row_actions", [$this, 'manage_row_actions'], 10, 2 );
                 add_action( "pre_get_posts", [$this, 'pre_get_posts'] );
             }
         }
