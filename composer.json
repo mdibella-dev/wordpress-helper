@@ -19,7 +19,7 @@
     "require": {},
     "autoload": {
             "psr-4": {
-                "wordpress_helper\\classes\\": "classes/"
+                "wordpress_helper\\classes\\": "classes"
             }
     }
 }
