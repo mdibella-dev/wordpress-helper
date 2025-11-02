@@ -8,7 +8,7 @@
  * @version 1.1.3
  */
 
-namespace wordpress_helper\classes;
+namespace wordpress_helper;
 
 
 
