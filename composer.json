@@ -1,0 +1,17 @@
+{
+    "name": "mdibella-dev/wordpress-helper",
+    "description": "WordPress Helper is a Composer repository which provides few helper classes to simplify the development of WordPress plugins.",
+    "type": "library",
+    "keywords": [
+        "composer",
+        "wordpress",
+        "repository"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marco Di Bella"
+        }
+    ],
+    "require": {}
+}
