@@ -13,5 +13,10 @@
             "name": "Marco Di Bella"
         }
     ],
-    "require": {}
+    "require": {},
+    "autoload": {
+            "psr-4": {
+                "wordpress_helper\\classes\\": "classes"
+            }
+    }
 }
