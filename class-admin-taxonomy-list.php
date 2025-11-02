@@ -5,7 +5,7 @@
  * @author  Marco Di Bella
  * @package wordpress-helper
  *
- * @version 1.1.2
+ * @version 1.1.3
  */
 
 namespace wordpress_helper;
@@ -132,9 +132,22 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Taxonomy_List' ) ) {
          */
 
         public function pre_get_posts( $query ) {
-        if ( is_admin() and $query->is_main_query() ) {
+            if ( is_admin() and $query->is_main_query() ) {
                 $this->manage_sorting( $query );
             }
+        }
+
+
+
+        /**
+         * Returns the primary column
+         *
+         * @param string $default Column name default for the specific list table, e.g. 'name'.
+         * @param string $screen  Screen ID for specific list table, e.g. 'plugins'.
+         */
+
+        public function list_table_primary_column( $default, $screen ) {
+            return $default;
         }
 
 
@@ -150,6 +163,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Taxonomy_List' ) ) {
                 add_filter( "manage_edit-{$this->get_taxonomy()}_sortable_columns", [$this, 'manage_sortable_columns'], 10, 1 );
                 add_filter( "{$this->get_taxonomy()}_row_actions", [$this, 'manage_row_actions'], 10, 2 );
                 add_action( "pre_get_posts", [$this, 'pre_get_posts'] );
+                add_filter( 'list_table_primary_column', [$this, 'list_table_primary_column'], 10, 2 );
             }
         }
     }
