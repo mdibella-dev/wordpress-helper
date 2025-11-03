@@ -4,7 +4,6 @@
  *
  * @author  Marco Di Bella
  * @package wordpress-helper
- * @version 1.1.3
  */
 
 namespace WordPress_Helper;

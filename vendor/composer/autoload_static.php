@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitca85fc61e0b585080a7cd7d6a894533c
+class ComposerStaticInitcc22d1773b18b06ddba6998a7298f998
 {
     public static $prefixLengthsPsr4 = array (
         'W' => 
@@ -24,15 +24,14 @@ class ComposerStaticInitca85fc61e0b585080a7cd7d6a894533c
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'WordPress_Helper\\Admin_Post_List' => __DIR__ . '/../..' . '/includes/Admin_Post_List.php',
         'WordPress_Helper\\Admin_Taxonomy_List' => __DIR__ . '/../..' . '/includes/Admin_Taxonomy_List.php',
-        'WordPress_Helper\\Shortcode' => __DIR__ . '/../..' . '/includes/Shortcode.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitca85fc61e0b585080a7cd7d6a894533c::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitca85fc61e0b585080a7cd7d6a894533c::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitca85fc61e0b585080a7cd7d6a894533c::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitcc22d1773b18b06ddba6998a7298f998::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitcc22d1773b18b06ddba6998a7298f998::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitcc22d1773b18b06ddba6998a7298f998::$classMap;
 
         }, null, ClassLoader::class);
     }
