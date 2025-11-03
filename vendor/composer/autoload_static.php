@@ -7,14 +7,14 @@ namespace Composer\Autoload;
 class ComposerStaticInitca85fc61e0b585080a7cd7d6a894533c
 {
     public static $prefixLengthsPsr4 = array (
-        'w' => 
+        'W' => 
         array (
-            'wordpress_helper\\' => 17,
+            'WordPress_Helper\\' => 17,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'wordpress_helper\\' => 
+        'WordPress_Helper\\' => 
         array (
             0 => __DIR__ . '/../..' . '/includes',
         ),
@@ -22,6 +22,9 @@ class ComposerStaticInitca85fc61e0b585080a7cd7d6a894533c
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'WordPress_Helper\\Admin_Post_List' => __DIR__ . '/../..' . '/includes/Admin_Post_List.php',
+        'WordPress_Helper\\Admin_Taxonomy_List' => __DIR__ . '/../..' . '/includes/Admin_Taxonomy_List.php',
+        'WordPress_Helper\\Shortcode' => __DIR__ . '/../..' . '/includes/Shortcode.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

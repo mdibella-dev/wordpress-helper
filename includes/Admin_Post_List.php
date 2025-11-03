@@ -1,14 +1,13 @@
 <?php
 /**
- * Class Admin_Post_List
+ * Class WordPress_Helper\Admin_Post_List
  *
  * @author  Marco Di Bella
  * @package wordpress-helper
- *
  * @version 1.1.1
  */
 
-namespace wordpress_helper;
+namespace WordPress_Helper;
 
 
 

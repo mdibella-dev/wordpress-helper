@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'wordpress_helper\\' => array($baseDir . '/includes'),
+    'WordPress_Helper\\' => array($baseDir . '/includes'),
 );
