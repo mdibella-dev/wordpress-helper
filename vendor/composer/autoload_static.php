@@ -24,6 +24,7 @@ class ComposerStaticInitcc22d1773b18b06ddba6998a7298f998
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'WordPress_Helper\\Admin_Post_List' => __DIR__ . '/../..' . '/includes/Admin_Post_List.php',
         'WordPress_Helper\\Admin_Taxonomy_List' => __DIR__ . '/../..' . '/includes/Admin_Taxonomy_List.php',
+        'WordPress_Helper\\Shortcode' => __DIR__ . '/../..' . '/includes/Shortcode.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
