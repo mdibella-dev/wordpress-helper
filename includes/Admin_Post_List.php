@@ -101,7 +101,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Post_List' ) ) {
 
 
         /**
-         * Trigger the sorting if the last query was made in the backend and it was related to our post type.
+         * Triggers the sorting if the last query was made in the backend and it was related to our post type.
          *
          * @param WP_Query $query A data object of the last query made
          */
@@ -115,6 +115,20 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Post_List' ) ) {
 
 
         /**
+         * Filters the list of views.
+         *
+         * @param string[] $views An array of available list table views.
+         */
+
+        public function filter_views( $views ) {
+            // do nothing
+            return $views;
+        }
+
+
+
+
+        /**
          * Constructor: Adds the hooks of this admin post list.
          */
 
@@ -124,6 +138,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Post_List' ) ) {
                 add_action( "manage_{$this->get_post_type()}_posts_custom_column", [$this, 'manage_custom_column'], 10, 2 );    // 9999?
                 add_filter( "manage_edit-{$this->get_post_type()}_sortable_columns", [$this, 'manage_sortable_columns'], 10, 1 );
                 add_action( "pre_get_posts", [$this, 'pre_get_posts'] );
+                add_filter( "views_edit-{$this->get_post_type()}", [$this, 'filter_views'], 10, 1 );
             }
         }
     }
