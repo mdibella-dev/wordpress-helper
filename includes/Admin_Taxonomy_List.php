@@ -112,7 +112,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Taxonomy_List' ) ) {
          * @see https://developer.wordpress.org/reference/hooks/taxonomy_row_actions/
          *
          * @param array   $actions  An array of action links to be displayed
-         * @param WP_Term $term     A term object.
+         * @param WP_Term $tag      A term object.
          *
          * @return array The modified list of action links
          */
