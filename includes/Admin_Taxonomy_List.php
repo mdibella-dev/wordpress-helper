@@ -2,8 +2,8 @@
 /**
  * Class WordPress_Helper\Admin_Taxonomy_List
  *
- * @author  Marco Di Bella
- * @package wordpress-helper
+ * @author      Marco Di Bella
+ * @package     wordpress-helper
  */
 
 namespace WordPress_Helper;
@@ -18,25 +18,24 @@ defined( 'ABSPATH' ) or exit;
 
 if ( ! class_exists( __NAMESPACE__ . '\Admin_Taxonomy_List' ) ) {
 
-    /**
-     * A class for the implementation of taxonomy tables.
-     */
-
     class Admin_Taxonomy_List {
 
         /**
          * The taxonomy.
          *
-         * @var string
+         * @var     string
          */
 
         protected $taxonomy = '';
 
 
+
         /**
          * Gets the post type.
          *
-         * @return string The post type slug
+         * @param   void
+         *
+         * @return  string The post type slug
          */
 
         protected function get_taxonomy() {
@@ -48,11 +47,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Taxonomy_List' ) ) {
         /**
          * Determines the columns of the admin taxonomy list.
          *
-         * @see https://developer.wordpress.org/reference/hooks/manage_screen-id_columns/
+         * @see     https://developer.wordpress.org/reference/hooks/manage_screen-id_columns/
          *
-         * @param array $default The column header labels keyed by column ID
+         * @param   array $default The column header labels keyed by column ID.
          *
-         * @return array An associative array describing the columns to use
+         * @return  array An associative array describing the columns to use.
          */
 
         public function manage_columns( $default ) {
@@ -65,11 +64,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Taxonomy_List' ) ) {
         /**
          * Generates the column output.
          *
-         * @see https://developer.wordpress.org/reference/hooks/manage_this-screen-taxonomy_custom_column/
+         * @see     https://developer.wordpress.org/reference/hooks/manage_this-screen-taxonomy_custom_column/
          *
-         * @param string $output      Custom column output. Default empty
-         * @param string $column_name Designation of the column to be output
-         * @param int    $term_id     The term ID
+         * @param   string $output      Custom column output. Default empty.
+         * @param   string $column_name Designation of the column to be output.
+         * @param   int    $term_id     The term ID.
+         *
+         * @return  void
          */
 
         public function manage_custom_column( $output, $column_name, $term_id ) {
@@ -81,9 +82,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Taxonomy_List' ) ) {
         /**
          * Registers sortable columns (by assigning appropriate orderby parameters).
          *
-         * @param array columns The columns
+         * @param   array columns The columns
          *
-         * @return array An associative array
+         * @return  array
          */
 
         public function manage_sortable_columns( $columns ) {
@@ -96,7 +97,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Taxonomy_List' ) ) {
         /**
          * Modifys the query string (by assigning appropriate parameters).
          *
-         * @param WP_Query $query A data object of the last query made
+         * @param   WP_Query $query A data object of the last query made.
+         *
+         * @return  void
          */
 
         public function manage_sorting( &$query ) {
@@ -108,13 +111,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Taxonomy_List' ) ) {
         /**
          * Filters the action links displayed for each term in the taxonomy list table.
          *
-         * @see https://wordpress.stackexchange.com/questions/78211/remove-quick-edit-for-custom-post-type
-         * @see https://developer.wordpress.org/reference/hooks/taxonomy_row_actions/
+         * @see     https://wordpress.stackexchange.com/questions/78211/remove-quick-edit-for-custom-post-type
+         * @see     https://developer.wordpress.org/reference/hooks/taxonomy_row_actions/
          *
-         * @param array   $actions  An array of action links to be displayed
-         * @param WP_Term $tag      A term object.
+         * @param   array   $actions  An array of action links to be displayed.
+         * @param   WP_Term $tag      A term object.
          *
-         * @return array The modified list of action links
+         * @return  array The modified list of action links.
          */
 
         public function manage_row_actions( $actions, $tag ) {
@@ -126,7 +129,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Taxonomy_List' ) ) {
         /**
          * Trigger the sorting if the last query was made in the backend and it was related to our post type.
          *
-         * @param WP_Query $query A data object of the last query made
+         * @param   WP_Query $query A data object of the last query made.
+         *
+         * @return  void
          */
 
         public function pre_get_posts( $query ) {
@@ -140,8 +145,10 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Taxonomy_List' ) ) {
         /**
          * Returns the primary column
          *
-         * @param string $default Column name default for the specific list table, e.g. 'name'.
-         * @param string $screen  Screen ID for specific list table, e.g. 'plugins'.
+         * @param   string $default Column name default for the specific list table, e.g. 'name'.
+         * @param   string $screen  Screen ID for specific list table, e.g. 'plugins'.
+         *
+         * @return  void
          */
 
         public function list_table_primary_column( $default, $screen ) {

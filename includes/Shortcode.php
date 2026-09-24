@@ -2,8 +2,8 @@
 /**
  * Class WordPress_Helper\Shortcode
  *
- * @author  Marco Di Bella
- * @package wordpress-helper
+ * @author      Marco Di Bella
+ * @package     wordpress-helper
  */
 
 namespace WordPress_Helper;
@@ -18,16 +18,12 @@ defined( 'ABSPATH' ) or exit;
 
 if ( ! class_exists( __NAMESPACE__ . '\Shortcode' ) ) {
 
-    /**
-     * An abstract class for the implementation of shortcodes.
-     */
-
     abstract class Shortcode {
 
         /**
          * The shortcode tag.
          *
-         * @var string
+         * @var     string
          */
 
         protected $tag = '';
@@ -37,7 +33,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Shortcode' ) ) {
         /**
          * The shortcode attributes (parameters).
          *
-         * @var array
+         * @var     array
          */
 
         protected $atts = [];
@@ -47,7 +43,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Shortcode' ) ) {
         /**
          * The shortcode content (the code between the opening and closing shortcode clamp).
          *
-         * @var string
+         * @var     string
          */
 
         protected $content = '';
@@ -69,7 +65,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Shortcode' ) ) {
         /**
          * Gets the tag.
          *
-         * @return string The shortcode tag
+         * @param   void
+         *
+         * @return  string The shortcode tag.
          */
 
         protected function get_tag() {
@@ -81,7 +79,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Shortcode' ) ) {
         /**
          * Gets the content.
          *
-         * @return string The content
+         * @param   void
+         *
+         * @return  string The content.
          */
 
         protected function get_content() {
@@ -95,7 +95,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Shortcode' ) ) {
          *
          * Note: Should be overloaded!
          *
-         * @return array The default attributes
+         * @param   void
+         *
+         * @return  array The default attributes.
          */
 
         protected function get_default_atts() {
@@ -109,7 +111,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Shortcode' ) ) {
         /**
          * Sets the content.
          *
-         * @param string $content The content
+         * @param   string $content The content.
+         *
+         * @return  void
          */
 
         protected function set_content( $content ) {
@@ -121,7 +125,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Shortcode' ) ) {
         /**
          * Merges the custom defined shortcode attributes with the default shortcode attributes.
          *
-         * @param array $atts The array with shortcode attributes
+         * @param   array $atts The array with shortcode attributes
+         *
+         * @return  void
          */
 
         protected function set_atts( $atts ) {
@@ -139,7 +145,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Shortcode' ) ) {
          *
          * Note: Should be overloaded!
          *
-         * @return bool true|false The outcome of the preparation process
+         * @param   void
+         *
+         * @return  bool true|false The outcome of the preparation process.
          */
 
         public function prepare() {
@@ -154,6 +162,10 @@ if ( ! class_exists( __NAMESPACE__ . '\Shortcode' ) ) {
          * Renders the shortcode (the shortcode output).
          *
          * Note: Must be overloaded!
+         *
+         * @param   void
+         *
+         * @return  void
          */
 
         abstract public function render();
@@ -162,6 +174,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Shortcode' ) ) {
 
         /**
          * Processes all shortcode calls.
+         *
+         * @param   array $atts
+         * @@param  string $content
+         *
+         * @return  void
          */
 
         public function callback( $atts, $content = '' ) {
