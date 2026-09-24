@@ -1,11 +1,4 @@
 <?php
-/**
- * Class WordPress_Helper\Admin_Post_List
- *
- * @author      Marco Di Bella
- * @package     wordpress-helper
- */
-
 namespace WordPress_Helper;
 
 
@@ -25,7 +18,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Post_List' ) ) {
          *
          * @var     string
          */
-
         protected $post_type = '';
 
 
@@ -33,11 +25,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Post_List' ) ) {
         /**
          * Gets the post type.
          *
+         * @since   1.1.0
+         *
          * @param   void
          *
          * @return  string The post type slug.
          */
-
         protected function get_post_type() {
             return $this->post_type;
         }
@@ -47,11 +40,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Post_List' ) ) {
         /**
          * Determines the columns of the admin post list.
          *
+         * @since   1.1.0
+         *
          * @param   array $default The defaults for columns.
          *
          * @return  array An associative array describing the columns to use.
          */
-
         public function manage_columns( $columns ) {
             // do nothing
             return $columns;
@@ -62,12 +56,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Post_List' ) ) {
         /**
          * Generates the column output.
          *
+         * @since   1.1.0
+         *
          * @param   string $column_name Designation of the column to be output.
          * @param   int    $post_id     ID of the post (aka record) to be output.
          *
          * @return  void
          */
-
         public function manage_custom_column( $column_name, $post_id ) {
             // do nothing
         }
@@ -77,11 +72,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Post_List' ) ) {
         /**
          * Registers sortable columns (by assigning appropriate orderby parameters).
          *
+         * @since   1.1.0
+         *
          * @param   array columns The columns.
          *
          * @return  array An associative array.
          */
-
         public function manage_sortable_columns( $columns ) {
             // do nothing
             return $columns;
@@ -92,11 +88,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Post_List' ) ) {
         /**
          * Modifys the query string (by assigning appropriate parameters).
          *
+         * @since   1.1.0
+         *
          * @param   WP_Query $query A data object of the last query made.
          *
          * @return  void
          */
-
         public function manage_sorting( &$query ) {
             // do nothing
         }
@@ -106,11 +103,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Post_List' ) ) {
         /**
          * Triggers the sorting if the last query was made in the backend and it was related to our post type.
          *
+         * @since   1.1.0
+         *
          * @param   WP_Query $query A data object of the last query made.
          *
          * @return  void
          */
-
         public function pre_get_posts( $query ) {
             if ( is_admin() and $query->is_main_query() and ( $this->get_post_type() === $query->get( 'post_type' ) ) ) {
                 $this->manage_sorting( $query );
@@ -122,11 +120,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Post_List' ) ) {
         /**
          * Filters the list of views.
          *
+         * @since   1.1.0
+         *
          * @param   array $views An array of available list table views.
          *
          * @return  array
          */
-
         public function filter_views( $views ) {
             // do nothing
             return $views;
@@ -136,8 +135,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Post_List' ) ) {
 
         /**
          * Constructor: Adds the hooks of this admin post list.
+         *
+         * @since   1.1.0
          */
-
         function __construct() {
             if ( ! empty( $this->post_type ) ) {
                 add_filter( "manage_{$this->get_post_type()}_posts_columns", [$this, 'manage_columns'], 10, 1 );

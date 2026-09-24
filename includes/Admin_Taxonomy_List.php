@@ -1,11 +1,4 @@
 <?php
-/**
- * Class WordPress_Helper\Admin_Taxonomy_List
- *
- * @author      Marco Di Bella
- * @package     wordpress-helper
- */
-
 namespace WordPress_Helper;
 
 
@@ -25,7 +18,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Taxonomy_List' ) ) {
          *
          * @var     string
          */
-
         protected $taxonomy = '';
 
 
@@ -33,11 +25,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Taxonomy_List' ) ) {
         /**
          * Gets the post type.
          *
+         * @since   1.1.1
+         *
          * @param   void
          *
-         * @return  string The post type slug
+         * @return  string The post type slug.
          */
-
         protected function get_taxonomy() {
             return $this->taxonomy;
         }
@@ -49,11 +42,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Taxonomy_List' ) ) {
          *
          * @see     https://developer.wordpress.org/reference/hooks/manage_screen-id_columns/
          *
+         * @since   1.1.1
+         *
          * @param   array $default The column header labels keyed by column ID.
          *
          * @return  array An associative array describing the columns to use.
          */
-
         public function manage_columns( $default ) {
             // do nothing
             return $default;
@@ -66,13 +60,14 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Taxonomy_List' ) ) {
          *
          * @see     https://developer.wordpress.org/reference/hooks/manage_this-screen-taxonomy_custom_column/
          *
+         * @since   1.1.1
+         *
          * @param   string $output      Custom column output. Default empty.
          * @param   string $column_name Designation of the column to be output.
          * @param   int    $term_id     The term ID.
          *
          * @return  void
          */
-
         public function manage_custom_column( $output, $column_name, $term_id ) {
             // do nothing
         }
@@ -82,11 +77,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Taxonomy_List' ) ) {
         /**
          * Registers sortable columns (by assigning appropriate orderby parameters).
          *
+         * @since   1.1.1
+         *
          * @param   array columns The columns
          *
          * @return  array
          */
-
         public function manage_sortable_columns( $columns ) {
             // do nothing
             return $columns;
@@ -97,11 +93,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Taxonomy_List' ) ) {
         /**
          * Modifys the query string (by assigning appropriate parameters).
          *
+         * @since   1.1.1
+         *
          * @param   WP_Query $query A data object of the last query made.
          *
          * @return  void
          */
-
         public function manage_sorting( &$query ) {
             // do nothing
         }
@@ -114,12 +111,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Taxonomy_List' ) ) {
          * @see     https://wordpress.stackexchange.com/questions/78211/remove-quick-edit-for-custom-post-type
          * @see     https://developer.wordpress.org/reference/hooks/taxonomy_row_actions/
          *
+         * @since   1.1.1
+         *
          * @param   array   $actions  An array of action links to be displayed.
          * @param   WP_Term $tag      A term object.
          *
          * @return  array The modified list of action links.
          */
-
         public function manage_row_actions( $actions, $tag ) {
             return $actions;
         }
@@ -129,11 +127,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Taxonomy_List' ) ) {
         /**
          * Trigger the sorting if the last query was made in the backend and it was related to our post type.
          *
+         * @since   1.1.1
+         *
          * @param   WP_Query $query A data object of the last query made.
          *
          * @return  void
          */
-
         public function pre_get_posts( $query ) {
             if ( is_admin() and $query->is_main_query() ) {
                 $this->manage_sorting( $query );
@@ -145,12 +144,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Taxonomy_List' ) ) {
         /**
          * Returns the primary column
          *
+         * @since   1.1.1
+         *
          * @param   string $default Column name default for the specific list table, e.g. 'name'.
          * @param   string $screen  Screen ID for specific list table, e.g. 'plugins'.
          *
          * @return  void
          */
-
         public function list_table_primary_column( $default, $screen ) {
             return $default;
         }
@@ -159,8 +159,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Taxonomy_List' ) ) {
 
         /**
          * Constructor: Adds the hooks of this admin post list.
+         *
+         * @since   1.1.1
          */
-
         function __construct() {
             if ( ! empty( $this->taxonomy ) ) {
                 add_filter( "manage_edit-{$this->get_taxonomy()}_columns", [$this, 'manage_columns'], 10, 1 );
